@@ -1,0 +1,148 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.min.css' %}">
+    <style>
+        body {
+            font-size: 10px;
+        }
+
+        table > tbody td {
+            height: 80px;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>会议室预定</h1>
+    <!--
+    <div style="overflow:hidden;display: none">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div id="datetimepicker12"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="clearfix" style="padding: 10px 0;float: right">
+        <div class='input-group' style="width: 230px;float:left;">
+            <input type='text' class="form-control" id='datetimepicker11' placeholder="请选择日期"/>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar">
+                </span>
+            </span>
+        </div>
+        <div style="padding: 0 5px;float: left">
+            <a href="#" class="btn btn-primary">确定</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>会议室</th>
+            {% for choice in time_choices %}
+                <th>{{ choice.1 }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>夏威夷</td>
+            {% for choice in time_choices %}
+                <td>{{ choice.0 }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>旧金山</td>
+            {% for choice in time_choices %}
+                <td>{{ choice.0 }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>白云山</td>
+            {% for choice in time_choices %}
+                <td>{{ choice.0 }}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+<script>
+
+    // 对Date的扩展，将 Date 转化为指定格式的String
+    // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+    // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+    // 例子：
+    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+    // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+    $(function () {
+        /*
+         $('#datetimepicker12').datetimepicker({
+         minView: "month",
+         language: "zh-CN",
+         inline: true,
+         sideBySide: true,
+         format: 'yyyy-mm-dd',
+         bootcssVer: 3,
+         });
+         */
+
+        $(function () {
+
+            initDatepicker();
+        });
+
+        function initDatepicker() {
+            $('#datetimepicker11').datetimepicker({
+                minView: "month",
+                language: "zh-CN",
+                sideBySide: true,
+                format: 'yyyy-mm-dd',
+                bootcssVer: 3,
+                startDate: new Date()
+                //autoclose: true,
+            }).on('changeDate', changeDate);
+        }
+
+        function changeDate(ev) {
+            var choiceDate = ev.date.Format('yyyy-MM-dd');
+            
+        }
+    });
+</script>
+</body>
+</html>
