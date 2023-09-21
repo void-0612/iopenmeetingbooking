@@ -44,22 +44,7 @@ time_choices = (
 )
 
 
-def get_7days_date():
-    tz = pytz.timezone('Asia/Shanghai')
 
-    dates = []
-    for i in range(7):
-        date = datetime.datetime.now(tz) + datetime.timedelta(days=i)
-
-        week_day = date.weekday()
-        day_map = {0: '星期一', 1: '星期二', 2: '星期三', 3: '星期四', 4: '星期五', 5: '星期六', 6: '星期日'}
-        week_str = day_map[week_day]
-
-        date_str = date.strftime("%Y年%m月%d日")
-        tup = (i + 1, date_str, week_str)
-        dates.append(tup)
-
-    return dates
 
 
 class UserInfo(models.Model):
@@ -83,13 +68,10 @@ class Booking(models.Model):
     useto = models.IntegerField(verbose_name='用途', choices=use_choices)
 
     booking_date = models.DateField(verbose_name='预定日期')
-    booking_date_choices = get_7days_date()
+
     # morning afternoon evening choices
 
     booking_time = models.IntegerField(verbose_name='预定时间段', choices=time_choices)
     ending_time = models.IntegerField(verbose_name='结束时间段', choices=time_choices)
     mae_time = models.IntegerField(verbose_name='上下晚时间段', choices=mae_choices)
-    class Meta:
-        unique_together = (
-            ('booking_date', 'booking_time', 'room')
-        )
+

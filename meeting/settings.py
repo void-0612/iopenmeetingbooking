@@ -15,6 +15,7 @@ import os
 import pytz
 TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = True
+X_FRAME_OPTIONS = 'ALLOWALL url'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

@@ -1,0 +1,646 @@
+@media only screen and (max-width: 1500px){
+	.xm-1{
+		padding: 	0 155px;
+	}
+	.logo-fine{
+		width: 280px;
+		top: 23px;
+	}
+	.header-fine-div{
+		padding-left: 300px;
+	}
+        .header-dang-div{
+		padding-left: 300px;
+	}
+	.fafa .flex-direction-nav .flex-prev{
+		left: 0px;
+	}
+
+	.fafa .flex-direction-nav .flex-next{
+		right: 0px;
+	}
+	.youq-dl dd {
+    float: left;
+    width: 210px;
+    margin-left: 20px;
+	}
+	.fafa .slides>li{height: 520px;}
+	#footer{
+		padding: 0px;
+	}
+	.fafa .flex-control-nav li{margin:0 10px;}
+	.fafa .flex-control-nav{
+		bottom: 30px;
+	}
+	.main1-1{
+		width: 706px;
+	}
+	.main1-2{
+		width: 450px;
+	}
+	.main1-1-bottom {
+    padding-top: 20px;
+	}
+	.main1-2-dl dd{
+		padding: 15px 0;
+	}
+	.main2-left{
+		width: 716px;
+		padding: 40px;
+		padding-right: 70px;
+	}
+	.main2-right{
+		width: 484px;
+		padding: 45px 160px 0 45px;
+	}
+	.dd_one-div{
+		padding-left: 35px;
+		padding-top: 35px;
+	}
+	.dd_one-div h1{
+		font-size: 24px;
+	}
+	.dd_one-div h2{
+		font-size: 18px;
+		margin:7px 0 38px;
+	}
+	.dd_ove-div h1{
+		margin:15px 0 10px;
+	}
+	.dd_ove-div {
+		margin-top: -54px;
+	}
+}
+@media only screen and (max-width: 1200px){
+	#main{
+	margin-top: 0px;
+}
+	#header{
+		display: none;
+	}
+
+	#header-2{
+		display: block;
+	}
+	.chenggao{
+		display: block;
+	}
+
+	.fafa .slides>li{
+		height: auto;
+		background-image: none!important;
+	}
+	.fafa .flex-direction-nav{
+		width: auto;
+		margin-left: 0;
+		left: 15px;
+		right: 15px;
+	}
+
+	.fafa .slides>li img.phone-img{
+		display: block;
+	}
+	.youq,.foo-nav{
+		display: none;
+	}
+	/*.fafa .flex-control-paging li a{
+		width: 10px;
+		height: 10px;
+		transition: .3s;
+		background-image: url(../images/arrow-b2.png);
+	}
+
+	.fafa .flex-control-paging li a.flex-active{
+		background-image: url(../images/arrow-b2-h.png);
+		width: 10px;
+	}
+	.fafa .flex-control-nav li{
+		margin:0 7px;
+	}
+	.fafa .flex-control-nav{
+		bottom: 20px;
+	}*/
+	.er-wp{
+		float: none;
+		margin:0 auto;
+		width: 120px;
+	}
+
+	.foo-p{
+		text-align: center;
+		margin-top: 10px;
+	}
+	.foo-p span{
+		display: block;
+		padding-left: 0;
+	}
+	#footer{
+		padding: 25px 0 20px;
+	}
+	.menu{
+		display: none;
+	}
+	.menud{
+		display: none;
+	}
+	.banner-2{
+		height: auto;
+		background-image: none!important;
+	}
+
+	.banner-2 img{
+		display: block;
+	}
+
+	.erji{
+		padding: 30px 0;
+	}
+	.erjid{
+		padding: 30px 0;
+	}
+	.mianbaoxie{
+		display: none;
+	}
+	.erji-title{
+		padding-bottom: 20px;
+	}
+	.erjid-title{
+		padding-bottom: 20px;
+	}
+	.danpian-h1{
+		font-size: 24px;
+	}
+	.danpian{
+		padding-top: 15px;
+	}
+	.main1-1{
+		float: none;
+		width: 100%;
+	}
+	.main1-2{
+		float: none;
+		width: 100%;
+		margin-top: 30px;
+	}
+	.main1-div{
+		margin-top: 25px;
+	}
+	.title-11 h1 span{
+		font-size: 26px;
+	}
+	.main2{
+		margin:30px 0;
+	}
+	.main2-left{
+		float: none;
+		width: 100%;
+	}
+	.main2-right{
+		float: none;
+		width: 100%;
+		height: auto;
+		padding: 45px;
+
+	}
+	.main3 dd{
+		width: 33.333333333%;
+	}
+	.main3 dd .imgbox_a .main3-hong {
+    opacity: 1;
+    visibility: visible;
+	}
+	#header-fine{
+		display: none;
+	}
+        #header-dang{
+		display: none;
+	}
+	.erji-title .fl{
+		float: none;
+		display: inline-block;
+	}
+	.erjid-title .fl{
+		float: none;
+		display: inline-block;
+	}
+	.erji-title{
+		font-size: 0;
+		line-height: normal;
+		text-align: center;
+	}
+	.erjid-title{
+		font-size: 0;
+		line-height: normal;
+		text-align: center;
+	}
+}
+@media only screen and (max-width: 992px){
+	.xm-1{
+		padding: 	0 80px;
+	}
+	.boshi-dl dd{
+		width: 23%;
+	}
+	.shizi-title-dl dd {
+    width: 31.3333333%;
+    margin-top: 2%;
+}
+  .shizi-list {
+        padding-bottom: 50px;
+    }
+    .shizi-title-dl dl{
+        margin-top: -2%;
+    }
+	.jigou-dl dd{
+		width: 48%;
+		margin-top: 15px;
+	}
+	.laoshi2-list dd{
+		float: none;
+		width: 100%;
+		margin-left: 0;
+		margin-top: 25px;
+	}
+	.laoshi2-list dl{
+		margin-left: 0;
+	}
+	.main{
+		padding: 30px 0;
+	}
+	.fmain2 dd{
+		margin-top: 15px;
+	}
+	.main2-right{
+		padding: 30px;
+		padding-bottom: 55px;
+		-webkit-background-size: cover;
+		background-size: cover;
+	}
+	.dd_one-div {
+    padding-left: 25px;
+    padding-top: 25px;
+	}
+	.main3 dd{
+		width: 50%;
+	}
+	.main2-left{
+		padding: 30px;
+		padding-right: 45px;
+	}
+}
+@media only screen and (max-width: 768px){
+	.xm-1 .item span{
+		width: 60px;
+		height: 60px;
+		line-height: 56px;
+		font-size: 18px;
+	}
+	.xm-1{
+		padding: 	0 30px;
+		margin-top: 20px;
+	}
+	.erji-content-title{
+		padding: 20px 0;
+	}
+	.erjid-content-title{
+		padding: 20px 0;
+	}
+	.xm-2-wp{
+		margin-top: 15px;
+	}
+	.laoshi44-p
+	{font-size: 15px;padding:10px 0;}
+	.shizi-list li
+	{margin-top: 20px;}
+	.sanji-dl dd>a
+	{font-size: 15px;height: 42px;line-height: 42px;padding: 0	20px;}
+	.boshi-dl dd{
+		width: 31.333333%;
+	}
+	.shizi-title-dl dd {
+    width: 48%;
+}
+.shizi-list-title{
+        float: none;
+
+    }
+    .shizi-list-a{
+        padding-top: 10px;
+    }
+    .shizi-list-a dd{
+        margin-left: 0;
+        margin-right: 15px;
+        height: 34px;
+        line-height: 34px;
+        margin-top: 5px;
+    }
+.shizi-title-dl{
+		margin-top: 15px;
+	}
+	.shizi-list {
+    padding-bottom: 20px;
+}
+	.jigou-dl dd{
+		width: 100%;
+		margin-top: 15px;
+		float: none;
+		margin-left: 0;
+	}
+	.jigou-title h1{
+		height: 45px;
+		line-height: 45px;
+		padding: 0	20px;
+	}
+	.jigou-dl dl{
+		margin-left: 0;
+	}
+	.jigou-dl dd>a{
+		height: auto;
+		padding: 8px 15px;
+		white-space:normal;
+		line-height: 1.6;
+	}
+	.dd_one-div {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+	.main3 dd{
+		width: 100%;
+		float: none;
+		border:0;
+		border-top: 1px solid #fff;
+	}
+	.main3 dl{
+		margin-left: 0;
+	}
+	.main3 dd:first-child{
+		border-top: 0;
+	}
+	.title-11 h1{
+		font-size: 12px;
+	}
+	.title-11 h1 span{
+		font-size: 22px;
+	}
+	.title-11 a.fr{
+		height: 30px;
+		line-height: 30px;
+		padding: 0	10px;
+		font-size: 12px;
+		margin-top: 0;
+	}
+	.main1-1-top dd{
+		width: 100%;
+		float: none;
+		margin-left: 0;
+	}
+	.main1-1-top dd:first-child{
+		margin-bottom: 25px;
+	}
+	.main1-1-top dl{
+		margin-left: 0;
+	}
+	.main1-1-bottom dd{
+		padding-left: 15px;
+		background-position: left center;
+	}
+	.main1-2-date{
+		float: none;
+		width: 100%;
+		padding-right: 0;
+		text-align: left;
+		font-size: 0;
+		line-height: normal;
+	}
+	.main1-2-date h2{padding-left: 10px;}
+	.main1-2-date h1,.main1-2-date h2{display: inline-block;}
+	.main1-2-dl dd{
+		padding: 15px;
+	}
+	.main1-2-con{
+		padding-left: 0;
+		border-left: 0;
+		border-top: 1px solid #ddd;
+		margin-top: 15px;
+		padding-top: 12px;
+	}
+	.main2-dl1 dd{
+		padding-right: 70px;
+	}
+	.main2-dl1 dd>span{
+		font-size: 12px;
+		top: 2px;
+	}
+	.main2-dl1 dd a{
+		font-size: 15px;
+	}
+	.main2-left h1{
+		font-size: 22px;
+		text-align: center;
+	}
+	.main3-hong-1{
+		left: 15px;
+		top: 15px;
+	}
+	.main3-hong-3{right: 15px;bottom: 15px;}
+	.more1{
+		margin-top: 25px;
+	}
+	.more1 a{
+		    width: 93px;
+    height: 31px;
+    line-height: 29px;
+    text-align: center;
+    font-size: 14px;
+    margin:0 auto;
+	}
+	.main2-left::after{
+		display: none;
+	}
+	.main2-left{
+		padding: 25px 15px 25px;
+	}
+	.main2-right{
+		padding: 25px 15px 25px;
+		background-position: center ;
+		background-image: none;
+		background-color: #f6f6f6;
+	}
+	.fmain2 dd{
+		font-size: 14px;
+		-webkit-background-size:20px ;
+		background-size:20px; 
+		padding-left: 28px;
+		margin-top:5px;
+		background-position: left 4px;
+	}
+	.main2-h1-con{
+		font-size: 18px;
+		margin-top: 10px;
+	}
+	.main2-h1 span{
+		float: none;
+		width: 100%;
+	}
+	.main2-dl1 dd{
+		margin-top: 12px;
+	}
+	.danpian-h1{
+		font-size: 22px;
+	}
+	.danpian{
+		padding-top: 20px;
+	}
+	.dan-a a{
+		font-size: 14px;
+	}
+	.erji-content-div {
+    padding-top: 0;
+	}
+	.erjid-content-div {
+		padding-top: 0;
+		}
+	.erji{
+		padding: 20px 0 25px;
+	}
+	.erjid{
+		padding: 20px 0 25px;
+	}
+	.fenye{
+		margin-top: 20px;
+		padding-top: 20px;
+	}
+	.list{
+		padding-top: 15px;
+	}
+	.list li{
+		padding-right: 70px;
+		margin-top: 12px;
+	}
+	.list li span{
+		font-size: 12px;
+	}
+	.logo-2{
+		width: 300px;
+		margin-top:24px;
+	}
+/*	.fafa .flex-control-nav li{
+		margin:0 5px;
+	}
+	.fafa .flex-control-nav{
+		bottom:15px;
+	}*/
+	.foo-p{
+		font-size: 12px;
+
+	}
+	.er-wp{
+		width: 100px;
+	}
+	.er img{
+		margin-bottom: 8px;
+	}
+
+	.fafa .flex-direction-nav a{
+		width: 30px;
+		height: 52px;
+		margin-top: -26px;
+		-webkit-background-size: 100%;
+		background-size: 100%;
+	}
+	#footer{
+		padding: 20px 0 15px;
+	}
+	.fafa .flex-control-paging li a{
+		width: 10px;
+		height: 10px;
+	}
+	.fafa .flex-control-nav{
+		bottom: 20px;
+	}
+	.fafa .flex-control-nav li{
+		margin:0 4px;
+	}
+}
+@media only screen and (max-width: 500px){
+	.boshi-dl dd{
+		width:48%;
+	}
+	.shizi-title-dl dd{
+        width: 100%;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    .shizi-title-dl dd:first-child{
+        margin-top: 0;
+    }
+    .shizi-title-dl dl{
+        margin:0;
+    }
+	.laoshi2-pic{
+		width: 100px;
+	}
+	.laoshi2-con{padding: 10px 15px 0;}
+	.laoshi2-con-p{
+		line-height: 1.6;
+		height: 4.8em;
+		    margin: 5px 0 3px;
+	}
+	.laoshi2-list dd{
+		margin-top: 15px;
+	}
+	.erji-title{
+		padding-bottom: 15px;
+
+	}
+	.erjid-title{
+		padding-bottom: 15px;
+
+	}
+	.erji-title .fl{
+		font-size: 18px;
+	}
+	.erjid-title .fl{
+		font-size: 18px;
+	}
+	.danpian-h1{
+		font-size: 20px;
+	}
+	.foo-p{
+		line-height: 1.8
+
+	}
+	.fafa .flex-direction-nav a{
+		width: 22px;
+		height: 38px;
+		margin-top: -19px;
+		-webkit-background-size: 100%;
+		background-size: 100%;
+	}
+
+	.footer-2{
+		padding: 15px 0 20px;
+	}
+	.logo-2{
+		width: 260px;
+		margin-top: 16px;
+	}
+	#header-2{
+		height: 55px;
+	}
+	.menu2{
+		height: 55px;
+	}
+	.chenggao{
+		height: 55px;
+	}
+	.menu2 li{
+		margin-top: 19px;
+	}
+}
+@media only screen and (max-width: 350px){
+	.logo-2{
+		width: 240px;
+		margin-top: 16px;
+	}
+}

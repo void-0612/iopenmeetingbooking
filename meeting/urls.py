@@ -18,9 +18,13 @@ from django.contrib import admin
 from web import views
 
 urlpatterns = [
-    path('',views.index),
+    path('',views.main),
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^login/', views.login),
     re_path(r'^index/', views.index),
     re_path(r'^booking/', views.booking),
+    re_path(r'^personal/', views.personal),
+    re_path(r'^bookingpersonal/', views.bookingpersonal),
+    re_path(r'^cancelbooking/', views.cancelbooking),
+
 ]

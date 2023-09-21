@@ -1,0 +1,139 @@
+﻿
+.classroom {
+    cursor:default;
+    width: 100%;
+	font-family: 'Microsoft YaHei';
+}
+
+body {
+	background-color:#fff;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+	border: 2px solid #777;
+}
+small {
+	font-size: 10px;
+	color: #999;
+}
+td, th {
+    //background-color:#f5fffc;
+    margin: 5px;
+    padding: 5px 2px;
+	height: 22px;
+	text-align: center;
+	font-size: 14px;
+	border: 1px dotted #aaa;
+}
+td{
+	font-size: 12px;
+	padding: 8px 1px;
+	margin: 4px;
+}
+.th2{
+	font-size: 12px;
+	padding: 2px 1px;
+	margin: 4px;
+}
+hr{
+  border:none;border-top:1px dotted #0066CC;margin:2px;
+  height:2px;/* for ie6 ie7 */
+}
+button {
+	font-size:18px;
+	font-family: 'Microsoft YaHei';
+    width: 140px;
+    line-height: 32px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #333;
+    border-radius: 5px;
+    margin: 0 20px 20px 0;
+    position: relative;
+    overflow: hidden;
+    cursor:pointer;
+    border: 1px solid #1e7db9;
+    box-shadow: 0 1px 2px #8fcaee inset,0 -1px 0 #497897 inset,0 -2px 3px #8fcaee inset;
+    background-color: #037CEB;
+    opacity:0.8;
+}
+.warning{
+	background-color: #d53939;
+    border: 1px solid #b42323;
+	box-shadow: 0 1px 2px #e99494 inset,0 -1px 0 #954b4b inset,0 -2px 3px #e99494 inset;
+}
+
+.center{ margin-left:auto;margin-right:auto;
+width:500px;
+	font-size: 24px;
+}
+
+button:hover, th:hover{
+	background-color: #038CFB;
+    opacity:1.0;
+}
+.warning:hover{
+	background-color: #d51111;
+    opacity:1.0;
+}
+td:hover, th:hover{
+    background-color:#f3f3f3;
+    //opacity:0.3;
+}
+
+.tablehover{
+    //opacity:0.9;
+    background-color:#0f0;
+}
+.now{
+    //opacity:0.9;
+    background-color:#FEFFE5;
+}
+.now:hover{
+    //opacity:0.9;
+    background-color:#FEFF99;
+}
+.split {
+	    border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+}
+.flip{
+}
+
+.cell{
+	line-height: 1.25;
+	font-size: 9px;
+    background-color:#fdd;
+    cursor:pointer;
+    //opacity:0.9;
+}
+.usable{
+    background-color:#D4F4FE;
+    //opacity:0.9;
+}
+.clscell{
+    background-color:#cfc;
+    //opacity:0.9;
+}
+.cell:hover{
+    background-color:#faa;
+    opacity:0.9;
+}
+.clscell:hover{
+    background-color:#6d6;
+    opacity:0.6;
+    //opacity:0.9;
+}
+.usable:hover{
+    background-color:#AAF4FE;
+    background-image:url(images/add.png);
+    background-position:center center ;
+    background-repeat:no-repeat;
+    opacity:0.9;
+}
+a, a:hover, a:active, a:focus {
+    outline: none;
+    text-decoration: none;
+    color: #3c8dbc;
+}

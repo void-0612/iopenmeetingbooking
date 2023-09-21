@@ -1,0 +1,186 @@
+/*功能性执行代码*/
+
+$(function(){
+
+	//AOS 渐入动画
+
+	// AOS.init({
+	// 	disable: window.innerWidth < 1200
+	// });
+
+
+	//owl插件调用
+
+	// .owl-carousel
+	// $('.index_11').owlCarousel({
+	// 	loop:false,
+	// 	margin:64,
+	// 	nav:true,
+	// 	dots:true,
+	// 	smartSpeed:500,
+	// 	mouseDrag:false,
+	// 	autoplay:true,
+	// 	autoplayTimeout:4000,
+	// 	autoplayHoverPause:true,
+	// 	responsive:{
+	// 		0:{
+	// 			items:1
+	// 		},
+	// 		768:{
+	// 			items:2
+	// 		},
+	// 		992:{
+	// 			items:3
+	// 		},
+	// 		1200:{
+	// 			items:4
+	// 		}
+	// 	}
+	// })
+
+
+	// owl 鼠标滚轮参与
+	// var mswel1 = $('.owl-carousel.index_11')
+	// mswel1.on('mousewheel', '.owl-stage', function (e) {
+	//     if (e.deltaY>0) {
+	//        mswel1.trigger('prev.owl');
+	//     } else {
+	//        mswel1.trigger('next.owl');
+	//     }
+	//     e.preventDefault();
+	// });
+
+
+	//banner轮播调用
+
+	// $(".flexslider").flexslider({
+	// 	animation : "fade",
+	// 	slideshowSpeed: 4000, //展示时间间隔ms
+	// 	animationSpeed:500, //滚动时间ms
+	// 	slideshow: true,// 载入页面时，是否自动播放
+	// 	controlNav: true,  //指示器
+	// 	directionNav: true //方向键
+	// });
+
+
+
+
+	//连续滚动调用函数
+
+	// $(".you-list").liMarquee({
+	// 	drag: false,
+	// 	scrollamount: 20,
+	// 	direction: 'right',
+	// 	runshort: false
+	// });
+
+
+	$("#sanlan").click(function(){
+		$("#nav-2-heidi").fadeToggle();
+		$(".nav-2").slideToggle();
+		$(".nav-2>ul>li>ul").slideUp();
+		$(".jiaspan").removeClass("cur");
+		$(".jiaspan-d").removeClass("cur");
+	})
+	$("#nav-2-heidi").click(function(){
+		$(this).fadeOut();
+		$(".nav-2>ul>li>ul").slideUp();
+		$(".nav-2").slideUp();
+	})
+	$(".jiaspan").click(function(){
+		if($(this).hasClass("cur")){
+			$(this).removeClass("cur");
+			$(".nav-2>ul>li>ul").slideUp();
+		}else{
+			$(".jiaspan").removeClass("cur");
+			$(this).addClass("cur");
+			$(".nav-2>ul>li>ul").slideUp();
+			$(this).next(".nav-2>ul>li>ul").slideDown();
+		}
+
+	})
+	$(".jiaspan-d").click(function(){
+		if($(this).hasClass("cur")){
+			$(this).removeClass("cur");
+			$(".nav-2>ul>li>ul").slideUp();
+		}else{
+			$(".jiaspan-d").removeClass("cur");
+			$(this).addClass("cur");
+			$(".nav-2>ul>li>ul").slideUp();
+			$(this).next(".nav-2>ul>li>ul").slideDown();
+		}
+
+	})
+
+	$(".nav>ul>li").hover(function(){
+
+		$(this).find("ul").stop(false,true).slideDown();
+	},function(){
+		$(this).find("ul").stop(false,true).hide();
+
+	})
+        $(".navd>ul>li").hover(function(){
+
+		$(this).find("ul").stop(false,true).slideDown();
+	},function(){
+		$(this).find("ul").stop(false,true).hide();
+
+	})
+
+	$('.main3-list').owlCarousel({
+		margin:0,
+		nav:false,
+		dots:true,
+		smartSpeed:500,
+		mouseDrag:false,
+		autoplay:false,
+		autoplayTimeout:4000,
+		autoplayHoverPause:true,
+		loop:true,
+		items:1
+	})
+
+	$(window).scroll(function () {
+        ST = $(window).scrollTop();
+        if (ST >174) {                
+            $("#header-fine").addClass("cur")
+	    $("#header-dang").addClass("cur")
+        } else {
+	    $("#header-fine").removeClass("cur")
+            $("#header-dang").removeClass("cur")
+        }
+    });
+
+    $(".nav-fine>ul>li").hover(function(){
+
+		$(this).find("ul").stop(false,true).slideDown();
+	},function(){
+		$(this).find("ul").stop(false,true).hide();
+
+	})
+    $(".nav-dang>ul>li").hover(function(){
+
+		$(this).find("ul").stop(false,true).slideDown();
+	},function(){
+		$(this).find("ul").stop(false,true).hide();
+
+	})
+
+  $(".menu li span").click(function(){
+		if($(this).hasClass("cur")){
+			$(this).removeClass("cur");
+			$(".menu li dl").slideUp(1000);
+		}else{
+			$(".menu li span").removeClass("cur");
+			$(this).addClass("cur");
+			$(".menu li dl").slideUp(1000);
+			$(this).next("dl").slideDown(1000);
+		}
+
+	})
+
+
+})/*function结束括号，JS代码请放此上！！！*/
+
+
+/*功能性执行代码*/

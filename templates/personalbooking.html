@@ -1,0 +1,349 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.min.css' %}">
+    <style>
+        body {
+            font-size: 10px;
+        }
+
+        .shade {
+            position: fixed;
+            z-index: 1040;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #999;
+            filter: alpha(opacity=50);
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+        }
+
+        .loading {
+            position: fixed;
+            z-index: 1050;
+            top: 40%;
+            left: 50%;
+            height: 32px;
+            width: 32px;
+            margin: 0 0 0 -16px;
+            background: url(/static/img/loading.gif);
+        }
+
+        table >th {
+
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .custom-hr{
+            margin-bottom:0;
+            margin-top:0;
+        }
+
+        .custom-th{
+            text-align: center;
+        }
+
+        td div {
+          flex: 1 1 auto;
+        }
+        .parent {
+          justify-content: space-between; /* 可以让子元素之间均匀分布 */
+            width:150px
+        }
+
+        .child {
+          flex-grow: 1; /* 子元素尽可能大 */
+          margin: 0 10px; /* 设置子元素之间的间距 */
+          border: 1px dashed #ccc; /* 可选：添加边框样式 */
+          padding: 20px; /* 可选：添加内边距样式 */
+            width: 80px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>会议室预定</h1>
+{#    <!-- 触发模态框的按钮 -->#}
+   <button type="button" class="btn btn-primary"  id="my-booking-button" ><a href="/index/">返回</a></button>
+    <table class="table table-bordered" style="text-align: center;">
+        <thead>
+        <tr >
+            <th class="custom-th">会议室</th>
+            <th class="custom-th">时间段</th>
+
+            {% for choice in time_choices %}
+                    {% if forloop.first %}
+                        <th class="custom-th">今天 <br>
+                            {{ choice.2 }}</th>
+                        {% else %}
+                            <th class="custom-th" >{{ choice.1|slice:"5:"}}<br>
+                                {{ choice.2 }}</th>
+                    {% endif %}
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody id="tBody">
+
+        </tbody>
+    </table>
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- 模态框内容 -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">是否取消预约</h4>
+                </div>
+                <div class="modal-body">
+                    <span id = "booking_info"></span>
+                    <br>
+                    <span id="room_name"></span>
+                     <br>
+                </div>
+                <div class="modal-footer">
+                    <!-- 确认和取消按钮 -->
+                    <button type="button" class="btn btn-primary" id="confirm-button">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- 遮罩层开始 -->
+<div id='shade' class='shade hide'></div>
+<!-- 遮罩层结束 -->
+<!-- 加载层开始 -->
+<div id='loading' class='loading hide'></div>
+<!-- 加载层结束 -->
+
+
+<script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'js/jquery.cookie.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+<script>
+var time_choices = {
+    1: '8:00',
+    2: '8:30',
+    3: '9:00',
+    4: '9:30',
+    5: '10:00',
+    6: '10:30',
+    7: '11:00',
+    8: '11:30',
+    9: '12:00',
+    10: '12:30',
+    11: '13:00',
+    12: '13:30',
+    13: '14:00',
+    14: '14:30',
+    15: '15:00',
+    16: '15:30',
+    17: '16:00',
+    18: '16:30',
+    19: '17:00',
+    20: '17:30',
+    21: '18:00',
+    22: '18:30',
+    23: '19:00',
+    24: '19:30',
+    25: '20:00',
+    26: '20:30',
+    27: '21:00',
+    28: '21:30',
+    29: '22:00',
+    30: '22:30'
+};
+use_choices = {1: '教学',
+               2: '会议',
+               3: '讲座',
+               4: '答辩'};
+
+
+    $(function () {
+        initBookingInfo();
+    });
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+            }
+        }
+    });
+
+
+
+    function initBookingInfo(date) {
+        SELECTED_ROOM = {del: {}, add: {}};
+
+        $('#shade,#loading').removeClass('hide');
+        $.ajax({
+            url: '/bookingpersonal/',
+            type: 'get',
+            data: {date: date},
+            dataType: 'JSON',
+            success: function (arg) {
+            $('#shade,#loading').addClass('hide');
+        if (arg.code === 1000) {
+            $('#tBody').empty();
+            $.each(arg.data, function (roomName, roomData) {
+                // 创建三行，每行包含一个会议室名称单元格和一个时间段单元格
+                for (var period = 1; period <= 3; period++) {
+                    var tr = $('<tr>');
+                    // 在第一行中，创建一个单元格用于显示会议室名称
+                    if (period === 1) {
+                        var roomCell = $('<td>').attr('rowspan', 3).text(roomName);
+                        tr.append(roomCell);
+                    }
+                    // 创建一个单元格用于显示时间段：上午、中午、下午
+                    var timeCell = $('<td>').text(period === 1 ? '上午' : period === 2 ? '下午' : '晚上');
+                    tr.append(timeCell);
+
+                    // 获取当前时间段的预约信息
+                    var bookings = roomData[period.toString()];
+                    //构造七天的单元格
+                     if (bookings.length === 0)
+                        {   //如果一行没有预约直接生成7 个空白格
+                            for (var j = 0 ;j<7 ; j++)
+                            {
+                                var tdElement = $('<td>')
+                                tdElement.css('background-color', 'lightblue');
+                                tr.append(tdElement);
+                            }
+                        }
+                     else{
+
+                           for (var j = 0 ;j<7 ; j++)
+                    {
+                            // 创建单元格用于显示预约信息
+                            var bookingCell = $('<td  class="parent">');
+                            var count = 0;
+                            //是否添加虚线分割 第一次不添加
+                            var ifaddhr = false
+                            // 添加预约信息到单元格中，用虚线分隔
+                            for (var i = 0; i < bookings.length; i++) {
+                                var booking = bookings[i];
+                                if (booking['预约日期'] === j)
+                                {
+                                    count++;
+                                    var bookingText =  time_choices[booking['开始时间']] +'-'+ time_choices[booking['结束时间']] + '<br>'+booking['预约人'] +' ' +use_choices[booking['用途']];
+                                    if(ifaddhr===true)
+                                    {
+                                        bookingCell.append('<hr  class="custom-hr">');
+                                    }
+                                    ifaddhr =true
+                                    // 创建一个带有文本的<div>元素并添加样式
+                                    var divElement = $('<div class="child">').html(bookingText);
+                                    //divElement.css('background-color', 'lightpink');
+                                    bookingCell.append(divElement);
+                                    bookingCell.css('background-color', 'lightpink');
+                                    tr.append(bookingCell);
+                                }
+
+                        }   //如果某一行没有对应的预约信息，加一个空的单元格
+                            if(count === 0){
+                                   var tdElement = $('<td>')
+                                    tdElement.css('background-color', 'lightblue');
+                                    tr.append(tdElement);
+                                    }
+                    }
+                     }
+                    // 添加行到表格
+                    $('#tBody').append(tr);
+                }
+            });
+        } else {
+            alert(arg.msg);
+        }
+    },
+    error: function () {
+        $('#shade,#loading').addClass('hide');
+        alert('请求异常');
+    }
+        })
+    }
+
+
+    var table = document.querySelector('table');
+    // 获取表头行
+    var theadRow = table.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
+    var rows = table.getElementsByTagName('tr');
+
+    table.addEventListener('click', function (event) {
+            var target = event.target; // 获取被点击的元素
+            console.log(target.innerText)
+            var booking_info = target.innerText
+            target=target.parentNode
+            if (target.tagName === 'TD')
+            { // 确保点击的是单元格
+                var rowIndex = target.parentNode.rowIndex;
+                var columnIndex = target.cellIndex;
+                if (((rowIndex % 3 !== 1) && (columnIndex===1)) || (columnIndex > 1))
+                {
+                    if(rowIndex % 3 === 1)
+                    {
+                        columnIndex--
+                    }
+                    var cell = rows[Math.ceil(((rowIndex / 3)-1))*3+1].cells[0];
+                    //预约室名称
+                    var roomnameinfo =cell.textContent;
+                    //获取 mae 时间
+                }
+                console.log(columnIndex)
+                console.log(roomnameinfo)
+                document.getElementById('booking_info').innerText=booking_info;
+                document.getElementById('room_name').innerText='会议室名称：'+ roomnameinfo;
+                $('#myModal').modal('show');
+                document.getElementById('confirm-button').addEventListener
+                ('click', function() {
+                        fetch('/cancelbooking/', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                        booking_data : columnIndex,
+                        roomname:roomnameinfo,
+                        booking_info:booking_info ,
+                        }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': $.cookie('csrftoken')
+                            }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.error!=null)
+                    {
+                        alert(data.error)
+
+                    }
+                    else
+                    {
+                            console.log('删除成功:', data);
+                            $('#myModal').modal('hide');
+                            initBookingInfo();
+                    }
+
+                }).catch(error =>
+                    {
+                        console.log(error)
+                    })
+                })
+        }});
+
+</script>
+</body>
+</html>
