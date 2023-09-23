@@ -174,6 +174,7 @@ def booking(request):
     if request.method == "GET":
         return get_booking_grid(request)
     else:
+        
         json_data = json.loads(request.body.decode('utf-8'))
         current_date = datetime.datetime.now(timezone).date()
         useto = json_data['useto']

@@ -10,80 +10,61 @@
         body {
             font-size: 10px;
         }
-
-        .shade {
-            position: fixed;
-            z-index: 1040;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #999;
-            filter: alpha(opacity=50);
-            -moz-opacity: 0.5;
-            opacity: 0.5;
-        }
-
-        .loading {
-            position: fixed;
-            z-index: 1050;
-            top: 40%;
-            left: 50%;
-            height: 32px;
-            width: 32px;
-            margin: 0 0 0 -16px;
-            background: url(/static/img/loading.gif);
-        }
-
-        table >th {
-
+        tr.custom_th th{
             text-align: center;
-            vertical-align: middle;
+            width: 11%;
         }
-
+        .child {
+          flex-grow: 1; /* 子元素尽可能大 */
+          margin: 0 0; /* 设置子元素之间的间距 */
+          {#border: 1px dashed #ccc; /* 可选：添加边框样式 */#}
+          padding: 0; /* 可选：添加内边距样式 */
+        }
         .custom-hr{
             margin-bottom:0;
             margin-top:0;
         }
+        /* 外边框加粗 */
+        table {
+    border-collapse: collapse;
+    border: 1px solid black; /* 外边框加粗 */
+    width: 100%; /* 设置表格宽度，根据需要调整 */
+}
 
-        .custom-th{
-            text-align: center;
+        /* 内部竖线为虚线 */
+        table tr td,th {
+            border-right: 1px dashed gray; /* 内部竖线为虚线 */
+            border-bottom: 1px solid gray; /* 内部横线为细实线 */
+            padding: 10px; /* 添加内边距，根据需要调整 */
+            text-align: center; /* 文本水平居中 */
+            }
+        select {
+            width: 60px; /* 可以根据需要调整宽度 */
+            height: 30px;
+            font-size: 15px;
+                }
+        .modal-body
+        {
+            font-size: 15px;
         }
-
-        td div {
-          flex: 1 1 auto;
-        }
-        .parent {
-          justify-content: space-between; /* 可以让子元素之间均匀分布 */
-            width:150px
-        }
-
-        .child {
-          flex-grow: 1; /* 子元素尽可能大 */
-          margin: 0 10px; /* 设置子元素之间的间距 */
-          border: 1px dashed #ccc; /* 可选：添加边框样式 */
-          padding: 20px; /* 可选：添加内边距样式 */
-            width: 80px;
-        }
-
+        .child:hover {
+     background-color: #ffa9a9; /* 鼠标悬浮时的背景颜色 */
+}
     </style>
 </head>
 <body>
-    <h1>会议室预定</h1>
-{#    <!-- 触发模态框的按钮 -->#}
-   <button type="button" class="btn btn-primary"  id="my-booking-button" ><a href="/index/">返回</a></button>
-    <table class="table table-bordered" style="text-align: center;">
+    <table  >
         <thead>
-        <tr >
-            <th class="custom-th">会议室</th>
-            <th class="custom-th">时间段</th>
+        <tr class="custom_th">
+            <th colspan="2" style="width: 20%"></th>
+            <th hidden="hidden"></th>
 
             {% for choice in time_choices %}
                     {% if forloop.first %}
-                        <th class="custom-th">今天 <br>
+                        <th>今天 <br>
                             {{ choice.2 }}</th>
                         {% else %}
-                            <th class="custom-th" >{{ choice.1|slice:"5:"}}<br>
+                            <th>{{ choice.1|slice:"5:"}}<br>
                                 {{ choice.2 }}</th>
                     {% endif %}
             {% endfor %}
@@ -100,24 +81,82 @@
             <!-- 模态框内容 -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">是否取消预约</h4>
+                    <h4 class="modal-title">光电与智能研究院会议室线上预约系统</h4>
                 </div>
                 <div class="modal-body">
-                    <span id = "booking_info"></span>
+                    <p>申请人：&nbsp;&nbsp;&nbsp;&nbsp;{{user_info.name}}</p>
                     <br>
-                    <span id="room_name"></span>
+                    <p id="room_name"></p>
                      <br>
+                    <p id="date_week"></p>
+                    <br>
+                    <!-- 表单内容 -->
+                    <form id="my-form">
+                        <p style="margin-left: 70px">
+                        <select id="leftDropdown">
+
+                        </select><span>-</span>
+                        <select id="rightDropdown">
+                        </select>
+                        </p>
+
+                        <br>
+                        <span id="useto"></span>
+                        <label>
+                            <input type="radio" name="useto" value=1 checked> 教学
+                        </label>
+                        <label>
+                            <input type="radio" name="useto" value=2> 会议
+                        </label>
+                        <label>
+                        <input type="radio" name="useto" value=3> 讲座
+                        </label>
+                        <label>
+                        <input type="radio" name="useto" value=4> 答辩
+                        </label>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <!-- 确认和取消按钮 -->
                     <button type="button" class="btn btn-primary" id="confirm-button">确认</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 </div>
+                <div style="padding:0 20px 20px 20px">
+                    <h5>申请须知：</h5>
+                    <span >1.会议室使用须提前预约，先约先用；特殊情况经相互协商后可以调整使用顺序。<br>
+                    2.会议室申请使用后，会务工作一般由使用申请人负责，会议室使用完毕后，负责人需关锁好门窗并及时归还钥匙。<br>
+                    3.任何课题组或个人在使用会议室期间，须爱护会议室的设备设施，安全使用，严禁私自接拉电源，私自移动设备。<br>
+                    4.部分会议室如需使用多功能设备请与办公室联系（音响设备等）。<br>
+                    5.会议取消请及时通知研究院办公室。<br>
+                    6.使用时，注意会议室的环境卫生，离开后请把垃圾带走。<br>
+                    工作时间使用：申请后，使用时提前半小时到231办公室取钥匙开门并登记<br>
+                    非工作时间使用：申请后，请提前在工作时间到231办公室取钥匙开门并登记<br></span>
+                </div>
             </div>
         </div>
     </div>
+    <!-- 取消框 -->
 
-
+    <div class="modal fade" id="cancel_booking" role="dialog">
+        <div class="modal-dialog">
+            <!-- 模态框内容 -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">是否取消预约</h4>
+                </div>
+                <div class="modal-body">
+                    <span id = "booking_info"></span>
+                    <br>
+                    <span id="cancel_room_name"></span>
+                </div>
+                <div class="modal-footer">
+                    <!-- 确认和取消按钮 -->
+                    <button type="button" class="btn btn-primary" id="cancel-button" style="background-color:#d95b5b">确认取消</button>
+                    <button type="button" class="btn btn2-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- 遮罩层开始 -->
 <div id='shade' class='shade hide'></div>
 <!-- 遮罩层结束 -->
@@ -132,7 +171,7 @@
 <script src="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
 <script src="{% static 'plugins/datetimepicker/bootstrap-datetimepicker.zh-CN.js' %}"></script>
 <script>
-var time_choices = {
+    var time_choices = {
     1: '8:00',
     2: '8:30',
     3: '9:00',
@@ -164,12 +203,11 @@ var time_choices = {
     29: '22:00',
     30: '22:30'
 };
-use_choices = {1: '教学',
+    use_choices = {1: '教学',
                2: '会议',
                3: '讲座',
                4: '答辩'};
-
-
+    var user_name= '{{user_info.name|safe}}'
     $(function () {
         initBookingInfo();
     });
@@ -189,11 +227,10 @@ use_choices = {1: '教学',
 
 
     function initBookingInfo(date) {
-        SELECTED_ROOM = {del: {}, add: {}};
 
         $('#shade,#loading').removeClass('hide');
         $.ajax({
-            url: '/bookingpersonal/',
+            url: '/booking/',
             type: 'get',
             data: {date: date},
             dataType: 'JSON',
@@ -204,14 +241,16 @@ use_choices = {1: '教学',
             $.each(arg.data, function (roomName, roomData) {
                 // 创建三行，每行包含一个会议室名称单元格和一个时间段单元格
                 for (var period = 1; period <= 3; period++) {
-                    var tr = $('<tr>');
+                    var tr = $('<tr >');
                     // 在第一行中，创建一个单元格用于显示会议室名称
                     if (period === 1) {
-                        var roomCell = $('<td>').attr('rowspan', 3).text(roomName);
+                        var roomCell = $('<td>').attr('rowspan', 3).text(roomName).css('text-align', 'center')
+                            .css('vertical-align','middle').css('font-weight', 'bold').css('width','10%');
                         tr.append(roomCell);
                     }
                     // 创建一个单元格用于显示时间段：上午、中午、下午
-                    var timeCell = $('<td>').text(period === 1 ? '上午' : period === 2 ? '下午' : '晚上');
+                    var timeCell = $('<td>').text(period === 1 ? '上午' : period === 2 ? '下午' : '晚上').css('text-align', 'center')
+                            .css('vertical-align','middle');
                     tr.append(timeCell);
 
                     // 获取当前时间段的预约信息
@@ -222,7 +261,7 @@ use_choices = {1: '教学',
                             for (var j = 0 ;j<7 ; j++)
                             {
                                 var tdElement = $('<td>')
-                                tdElement.css('background-color', 'lightblue');
+                                tdElement.css('background-color', '#cef2fe');
                                 tr.append(tdElement);
                             }
                         }
@@ -231,7 +270,7 @@ use_choices = {1: '教学',
                            for (var j = 0 ;j<7 ; j++)
                     {
                             // 创建单元格用于显示预约信息
-                            var bookingCell = $('<td  class="parent">');
+                            var bookingCell = $('<td>');
                             var count = 0;
                             //是否添加虚线分割 第一次不添加
                             var ifaddhr = false
@@ -244,21 +283,20 @@ use_choices = {1: '教学',
                                     var bookingText =  time_choices[booking['开始时间']] +'-'+ time_choices[booking['结束时间']] + '<br>'+booking['预约人'] +' ' +use_choices[booking['用途']];
                                     if(ifaddhr===true)
                                     {
-                                        bookingCell.append('<hr  class="custom-hr">');
+                                        bookingCell.append('<hr class="custom-hr">');
                                     }
                                     ifaddhr =true
                                     // 创建一个带有文本的<div>元素并添加样式
                                     var divElement = $('<div class="child">').html(bookingText);
-                                    //divElement.css('background-color', 'lightpink');
                                     bookingCell.append(divElement);
-                                    bookingCell.css('background-color', 'lightpink');
+                                    bookingCell.css('background-color', '#ffd8d8');
                                     tr.append(bookingCell);
                                 }
 
                         }   //如果某一行没有对应的预约信息，加一个空的单元格
                             if(count === 0){
                                    var tdElement = $('<td>')
-                                    tdElement.css('background-color', 'lightblue');
+                                    tdElement.css('background-color', '#cef2fe');
                                     tr.append(tdElement);
                                     }
                     }
@@ -277,16 +315,147 @@ use_choices = {1: '教学',
     }
         })
     }
-
-
     var table = document.querySelector('table');
     // 获取表头行
     var theadRow = table.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
     var rows = table.getElementsByTagName('tr');
-
+        // 添加点击事件处理程序
+    var ifaddEvent = true
     table.addEventListener('click', function (event) {
             var target = event.target; // 获取被点击的元素
-            console.log(target.innerText)
+            if (target.tagName === 'TD') { // 确保点击的是单元格
+                var cellText = target.textContent;
+                var rowIndex = target.parentNode.rowIndex;
+                var columnIndex = target.cellIndex;
+                console.log(columnIndex)
+                console.log(rowIndex)
+                if (((rowIndex % 3 !== 1) && (columnIndex===1)) || (columnIndex > 1))
+                {
+                    if(rowIndex % 3 === 1)
+                    {
+                        columnIndex--
+                    }
+                    var cell = rows[Math.ceil(((rowIndex / 3)-1))*3+1].cells[0];
+                    var roomnameinfo =cell.textContent;
+                    var spanRoomName = document.getElementById('room_name');
+                    spanRoomName.innerText = '教'+'\u3000'+'室：'+'\u3000'+ roomnameinfo
+                    document.getElementById('useto').innerText='用'+'\u3000'+'途:'+'\u3000'
+                    var spanTime = document.getElementById('date_week');
+                    var headContent = theadRow.cells[columnIndex+1].textContent.split(/\s+/); // 获取第二列表头的内容
+                    var mae =((rowIndex % 3) === 1 ? '上午' : (rowIndex % 3) === 2 ? '下午' : '晚上')
+                    spanTime.innerText ='时'+'\u3000'+'间：'+'\u3000'+ headContent[0]+'('+headContent[1]+')' + '   ' + mae
+                    var leftDropdown = document.getElementById('leftDropdown');
+                    var rightDropdown = document.getElementById('rightDropdown');
+                    if(mae ==='上午')
+                    {
+                        leftDropdown.innerHTML = ''; // 清空左侧下拉框的选项
+                        rightDropdown.innerHTML = ''; // 清空右侧下拉框的选项
+                        for (var i = 1; i <= 8; i++) {
+                            leftDropdown.appendChild(new Option(time_choices[i], i));
+                         }
+                         for (var i = 2; i <= 9; i++) {
+                            rightDropdown.appendChild(new Option(time_choices[i], i));
+                         }
+                    }
+                    else if(mae ==='下午')
+                    {
+                        leftDropdown.innerHTML = ''; // 清空左侧下拉框的选项
+                        rightDropdown.innerHTML = ''; // 清空右侧下拉框的选项
+                         for (var i = 9; i <= 20; i++) {
+                            leftDropdown.appendChild(new Option(time_choices[i], i));
+                         }
+                         for (var i = 10; i <= 21; i++) {
+                            rightDropdown.appendChild(new Option(time_choices[i], i));
+                         }
+                    }
+                    else
+                    {
+                        leftDropdown.innerHTML = ''; // 清空左侧下拉框的选项
+                        rightDropdown.innerHTML = ''; // 清空右侧下拉框的选项
+                          for (var i = 21; i <= 29; i++) {
+                            leftDropdown.appendChild(new Option(time_choices[i], i));
+                         }
+                         for (var i = 22; i <= 30; i++) {
+                            rightDropdown.appendChild(new Option(time_choices[i], i));
+                         }
+                    }
+                    $('#myModal').modal('show');
+                    // 获取确认按钮元素
+                    var confirmButton = document.getElementById('confirm-button');
+                    if (ifaddEvent)
+                    {
+                           // 添加点击事件监听器
+                         confirmButton.addEventListener('click', function() {
+                         var leftDropdownValue = parseInt(document.getElementById('leftDropdown').value);
+                        var rightDropdownValue = parseInt(document.getElementById('rightDropdown').value);
+
+                        if (rightDropdownValue > leftDropdownValue) {
+                            // 合理的时间选择，可以继续提交表单或其他操作
+                            submitFormData();
+                        } else {
+                                // 不合理的时间选择，弹出错误框
+                                alert('时间选择不合理，请重新选择。');
+                    }
+                        });
+                         ifaddEvent = false
+                    }
+
+                    function submitFormData() {
+                    // 获取表单元素
+                    {#var form = document.getElementById('my-form');#}
+
+                    // 获取选中的单选按钮的值
+                    var selectedUseto = document.querySelector('input[name="useto"]:checked').value;
+                    // 获取左侧和右侧下拉框的选中值
+                    var leftDropdownValue = document.getElementById('leftDropdown').value;
+                    var rightDropdownValue = document.getElementById('rightDropdown').value;
+
+                    // 这里可以执行提交表单数据的操作，例如使用Ajax将数据发送到后端
+                    fetch('/booking/', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                        booking_data : columnIndex,
+                        mae_time:mae,
+                        roomname:roomnameinfo,
+                        useto: selectedUseto,
+                        booking_time: leftDropdownValue,
+                        ending_time: rightDropdownValue
+                        }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': $.cookie('csrftoken')
+                            }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.error!=null)
+                    {
+                        alert(data.error);
+                        initBookingInfo();
+			location.reload(); 
+			
+                    }
+                    else
+                    {
+                            console.log('成功提交数据:', data);
+                            $('#myModal').modal('hide');
+ 				location.reload(); 
+                            initBookingInfo();
+                    }
+                }).catch(error =>
+                    {
+                        console.log(error)
+                    })
+                }
+                }
+            }
+        });
+    //删除功能
+    table.addEventListener('click', function (event) {
+            var target = event.target; // 获取被点击的元素
+            if(target.innerText.split(' ')[0].split('\n')[1]===user_name)
+            {
+                console.log(target.innerText)
             var booking_info = target.innerText
             target=target.parentNode
             if (target.tagName === 'TD')
@@ -304,12 +473,11 @@ use_choices = {1: '教学',
                     var roomnameinfo =cell.textContent;
                     //获取 mae 时间
                 }
-                console.log(columnIndex)
-                console.log(roomnameinfo)
+
                 document.getElementById('booking_info').innerText=booking_info;
-                document.getElementById('room_name').innerText='会议室名称：'+ roomnameinfo;
-                $('#myModal').modal('show');
-                document.getElementById('confirm-button').addEventListener
+                document.getElementById('cancel_room_name').innerText='会议室名称：'+ roomnameinfo;
+                $('#cancel_booking').modal('show');
+                document.getElementById('cancel-button').addEventListener
                 ('click', function() {
                         fetch('/cancelbooking/', {
                         method: 'POST',
@@ -328,12 +496,13 @@ use_choices = {1: '教学',
                     if(data.error!=null)
                     {
                         alert(data.error)
+ 			location.reload(); 
 
                     }
                     else
                     {
                             console.log('删除成功:', data);
-                            $('#myModal').modal('hide');
+                            $('#cancel_booking').modal('hide');
                             initBookingInfo();
                     }
 
@@ -342,7 +511,24 @@ use_choices = {1: '教学',
                         console.log(error)
                     })
                 })
-        }});
+        }
+            }
+});
+// 获取按钮元素
+const btn = document.querySelector('.btn-default');
+
+// 为按钮添加点击事件
+btn.addEventListener('click', () => {
+  location.reload(); 
+});
+// 获取按钮元素
+const btn2 = document.querySelector('.btn2-default');
+
+// 为按钮添加点击事件
+btn2.addEventListener('click', () => {
+  location.reload(); 
+});
+
 
 </script>
 </body>
